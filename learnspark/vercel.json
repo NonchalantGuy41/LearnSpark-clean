@@ -2,16 +2,15 @@
   "version": 2,
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": "dist/client",
   "functions": {
     "api/index.js": {
-      "includeFiles": "dist/server/**"
+      "includeFiles": "dist/**"
     }
   },
   "routes": [
     {
       "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "dest": "/dist/client/assets/$1"
     },
     {
       "src": "/(.*)",
