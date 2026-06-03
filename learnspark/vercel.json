@@ -1,20 +1,5 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "dist/**"
-    }
-  },
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/dist/client/assets/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.js"
-    }
-  ]
+  "installCommand": "npm install"
 }
