@@ -1,0 +1,159 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * LearnSpark — Midnight Indigo design system.
+ * Editorial serif headings (Instrument Serif) + Work Sans body.
+ * All color tokens in oklch. Use semantic tokens, never raw colors.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600;700&display=swap");
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-indigo: var(--indigo);
+  --color-indigo-glow: var(--indigo-glow);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Midnight Indigo palette */
+  --background: oklch(0.13 0.04 280);
+  --foreground: oklch(0.96 0.01 280);
+  --surface: oklch(0.17 0.045 280);
+  --surface-2: oklch(0.21 0.05 280);
+  --card: oklch(0.17 0.045 280);
+  --card-foreground: oklch(0.96 0.01 280);
+  --popover: oklch(0.17 0.045 280);
+  --popover-foreground: oklch(0.96 0.01 280);
+
+  --primary: oklch(0.62 0.22 275);
+  --primary-foreground: oklch(0.98 0.01 280);
+  --indigo: oklch(0.62 0.22 275);
+  --indigo-glow: oklch(0.74 0.18 285);
+
+  --secondary: oklch(0.24 0.05 280);
+  --secondary-foreground: oklch(0.96 0.01 280);
+  --muted: oklch(0.22 0.04 280);
+  --muted-foreground: oklch(0.7 0.03 280);
+  --accent: oklch(0.32 0.12 280);
+  --accent-foreground: oklch(0.98 0.01 280);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 280);
+  --border: oklch(0.28 0.05 280 / 60%);
+  --input: oklch(0.24 0.05 280);
+  --ring: oklch(0.62 0.22 275);
+
+  --chart-1: oklch(0.62 0.22 275);
+  --chart-2: oklch(0.74 0.18 285);
+  --chart-3: oklch(0.7 0.18 200);
+  --chart-4: oklch(0.78 0.15 90);
+  --chart-5: oklch(0.66 0.2 340);
+
+  --sidebar: oklch(0.11 0.04 280);
+  --sidebar-foreground: oklch(0.85 0.02 280);
+  --sidebar-primary: oklch(0.62 0.22 275);
+  --sidebar-primary-foreground: oklch(0.98 0.01 280);
+  --sidebar-accent: oklch(0.2 0.05 280);
+  --sidebar-accent-foreground: oklch(0.96 0.01 280);
+  --sidebar-border: oklch(0.24 0.05 280 / 60%);
+  --sidebar-ring: oklch(0.62 0.22 275);
+
+  --gradient-aurora: radial-gradient(
+      120% 90% at 20% 0%,
+      oklch(0.45 0.22 275 / 0.55) 0%,
+      transparent 55%
+    ),
+    radial-gradient(80% 70% at 95% 30%, oklch(0.55 0.2 310 / 0.4) 0%, transparent 60%),
+    radial-gradient(90% 80% at 50% 110%, oklch(0.5 0.2 250 / 0.45) 0%, transparent 60%);
+  --gradient-indigo: linear-gradient(135deg, oklch(0.62 0.22 275), oklch(0.74 0.18 285));
+  --shadow-glow: 0 20px 60px -20px oklch(0.62 0.22 275 / 0.45);
+  --shadow-soft: 0 10px 40px -20px oklch(0.05 0.04 280 / 0.6);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .bg-aurora { background-image: var(--gradient-aurora); }
+  .bg-indigo-gradient { background-image: var(--gradient-indigo); }
+  .text-indigo-gradient {
+    background-image: var(--gradient-indigo);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .glass {
+    background: oklch(0.17 0.045 280 / 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid oklch(0.4 0.08 280 / 0.25);
+  }
+}
