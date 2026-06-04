@@ -1,19 +1,19 @@
 #!/bin/bash
 set -e
 npm run build
+npx esbuild dist/server/server.js \
+  --bundle \
+  --platform=node \
+  --format=esm \
+  --outfile=dist/server/server-bundled.js \
+  --external:node:* \
+  --external:react-dom/server \
+  --log-level=error
 mkdir -p .vercel/output/functions/index.func/assets
-mkdir -p .vercel/output/functions/index.func/node_modules/@tanstack
 mkdir -p .vercel/output/static/assets
-cp dist/server/server.js .vercel/output/functions/index.func/server.js
+cp dist/server/server-bundled.js .vercel/output/functions/index.func/server.js
 cp -r dist/server/assets .vercel/output/functions/index.func/assets
 cp -r dist/client/assets .vercel/output/static/assets
-cp -r node_modules/h3-v2 .vercel/output/functions/index.func/node_modules/h3-v2
-cp -r node_modules/seroval .vercel/output/functions/index.func/node_modules/seroval
-cp -r node_modules/react .vercel/output/functions/index.func/node_modules/react
-cp -r node_modules/@tanstack/router-core .vercel/output/functions/index.func/node_modules/@tanstack/router-core
-cp -r node_modules/@tanstack/react-router .vercel/output/functions/index.func/node_modules/@tanstack/react-router
-cp -r node_modules/@tanstack/history .vercel/output/functions/index.func/node_modules/@tanstack/history
-echo '{"type":"module"}' > .vercel/output/functions/index.func/package.json
 cat > .vercel/output/functions/index.func/index.mjs << 'JSEOF'
 import server from "./server.js";
 export default async function handler(req, res) {
@@ -32,5 +32,6 @@ export default async function handler(req, res) {
   res.end(Buffer.from(body));
 }
 JSEOF
+echo '{"type":"module"}' > .vercel/output/functions/index.func/package.json
 echo '{"runtime":"nodejs22.x","handler":"index.mjs","launcherType":"Nodejs","shouldAddHelpers":true}' > .vercel/output/functions/index.func/.vc-config.json
 echo '{"version":3,"routes":[{"handle":"filesystem"},{"src":"/(.*)","dest":"/index"}]}' > .vercel/output/config.json
