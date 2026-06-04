@@ -16,12 +16,7 @@ export default async function handler(req, res) {
   for (const [key, value] of Object.entries(req.headers)) {
     if (value) headers.set(key, Array.isArray(value) ? value.join(", ") : value);
   }
-  const request = new Request(url, {
-    method: req.method,
-    headers,
-    body: req.method !== "GET" && req.method !== "HEAD" ? req : undefined,
-    duplex: "half",
-  });
+  const request = new Request(url, { method: req.method, headers, body: req.method !== "GET" && req.method !== "HEAD" ? req : undefined, duplex: "half" });
   const response = await server.fetch(request, process.env, {});
   res.statusCode = response.status;
   response.headers.forEach((value, key) => res.setHeader(key, value));
