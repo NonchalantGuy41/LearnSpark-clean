@@ -6,6 +6,7 @@ mkdir -p .vercel/output/static/assets
 cp dist/server/server.js .vercel/output/functions/index.func/server.js
 cp dist/server/assets/* .vercel/output/functions/index.func/assets/
 cp dist/client/assets/* .vercel/output/static/assets/
+echo '{"type":"module"}' > .vercel/output/functions/index.func/package.json
 cat > .vercel/output/functions/index.func/index.js << 'JSEOF'
 import server from "./server.js";
 export default async function handler(req, res) {
