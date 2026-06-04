@@ -4,10 +4,11 @@ npm run build
 mkdir -p .vercel/output/functions/index.func/assets
 mkdir -p .vercel/output/static/assets
 cp dist/server/server.js .vercel/output/functions/index.func/server.js
-cp dist/server/assets/* .vercel/output/functions/index.func/assets/
-cp dist/client/assets/* .vercel/output/static/assets/
-cp -r node_modules .vercel/output/functions/index.func/node_modules
-cp package.json .vercel/output/functions/index.func/package.json
+cp -r dist/server/assets .vercel/output/functions/index.func/assets
+cp -r dist/client/assets .vercel/output/static/assets
+cp -r node_modules/h3-v2 .vercel/output/functions/index.func/node_modules/h3-v2 2>/dev/null || true
+cp -r node_modules/nitro .vercel/output/functions/index.func/node_modules/nitro 2>/dev/null || true
+echo '{"type":"module","dependencies":{}}' > .vercel/output/functions/index.func/package.json
 cat > .vercel/output/functions/index.func/index.mjs << 'JSEOF'
 import server from "./server.js";
 export default async function handler(req, res) {
