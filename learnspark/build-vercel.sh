@@ -2,13 +2,18 @@
 set -e
 npm run build
 mkdir -p .vercel/output/functions/index.func/assets
+mkdir -p .vercel/output/functions/index.func/node_modules/@tanstack
 mkdir -p .vercel/output/static/assets
 cp dist/server/server.js .vercel/output/functions/index.func/server.js
 cp -r dist/server/assets .vercel/output/functions/index.func/assets
 cp -r dist/client/assets .vercel/output/static/assets
-cp -r node_modules/h3-v2 .vercel/output/functions/index.func/node_modules/h3-v2 2>/dev/null || true
-cp -r node_modules/nitro .vercel/output/functions/index.func/node_modules/nitro 2>/dev/null || true
-echo '{"type":"module","dependencies":{}}' > .vercel/output/functions/index.func/package.json
+cp -r node_modules/h3-v2 .vercel/output/functions/index.func/node_modules/h3-v2
+cp -r node_modules/seroval .vercel/output/functions/index.func/node_modules/seroval
+cp -r node_modules/react .vercel/output/functions/index.func/node_modules/react
+cp -r node_modules/@tanstack/router-core .vercel/output/functions/index.func/node_modules/@tanstack/router-core
+cp -r node_modules/@tanstack/react-router .vercel/output/functions/index.func/node_modules/@tanstack/react-router
+cp -r node_modules/@tanstack/history .vercel/output/functions/index.func/node_modules/@tanstack/history
+echo '{"type":"module"}' > .vercel/output/functions/index.func/package.json
 cat > .vercel/output/functions/index.func/index.mjs << 'JSEOF'
 import server from "./server.js";
 export default async function handler(req, res) {
